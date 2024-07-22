@@ -1,0 +1,56 @@
+<div>
+  <app-navbar [items]="items" (openEventEmitter)="setShowCart()" />
+
+  <div class="container my-4">
+    <h2>Catalogo de productos app </h2>
+    <app-catalog [products]="products" (productEventEmitter)="addItemCart($event)" />
+
+    @if (showCart) {
+
+    <div class="abrir-modal animacion fadeIn">
+
+      <div class="modal" style="display: block;" tabindex="-1">
+
+        <div class="modal-dialog" role="document">
+
+          <div class="modal-content">
+
+            <div class="modal-header d-flex justify-content-between">
+
+              <h5 class="modal-title">
+                Carro de compras!
+              </h5>
+              <button class="btn btn-danger" (click)="setShowCart()">X</button>
+
+            </div>
+            <div class="modal-body">
+
+              @if (items.length>0) {
+
+              <div>
+                <cart [items]="items" (idProductEventEmitter)="deleteItemCart($event)" [total]="total" />
+              </div>
+
+              }@else {
+              <div class="alert alert-warning">
+                No hay elementos en el carro !
+              </div>
+              }
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+    }
+  </div>
